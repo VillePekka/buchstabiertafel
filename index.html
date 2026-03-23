@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Interaktive Buchstabiertafel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .result {
+            font-size: 18px;
+        }
+
+        .line {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Interaktive Buchstabiertafel</h2>
+    <input type="text" id="inputText" placeholder="Text eingeben..." oninput="convert()">
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+const alphabet = {
+    'A': 'Anton',     'B': 'Berta',     'C': 'Cäsar',
+    'D': 'Dora',      'E': 'Emil',      'F': 'Friedrich',
+    'G': 'Gustav',    'H': 'Heinrich',  'I': 'Ida',
+    'J': 'Julius',    'K': 'Kaufmann',  'L': 'Ludwig',
+    'M': 'Martha',    'N': 'Nordpol',   'O': 'Otto',
+    'P': 'Paula',     'Q': 'Quelle',    'R': 'Richard',
+    'S': 'Samuel',    'T': 'Theodor',   'U': 'Ulrich',
+    'V': 'Viktor',    'W': 'Wilhelm',   'X': 'Xanthippe',
+    'Y': 'Ypsilon',   'Z': 'Zacharias',
+
+    // Umlaute & ß
+    'Ä': 'Ärger',
+    'Ö': 'Ökonom',
+    'Ü': 'Übermut',
+    'ß': 'Eszett',
+
+    // Numbers (German)
+    '0': 'Null',
+    '1': 'Eins',
+    '2': 'Zwei',
+    '3': 'Drei',
+    '4': 'Vier',
+    '5': 'Fünf',
+    '6': 'Sechs',
+    '7': 'Sieben',
+    '8': 'Acht',
+    '9': 'Neun'
+};
+
+function convert() {
+    const input = document.getElementById("inputText").value;
+    const resultDiv = document.getElementById("result");
+
+    resultDiv.innerHTML = "";
+
+    for (let char of input) {
+        let upperChar = char.toUpperCase();
+
+        if (alphabet[upperChar]) {
+            resultDiv.innerHTML += `<div class="line">${char} — ${alphabet[upperChar]}</div>`;
+        } else if (char === " ") {
+            resultDiv.innerHTML += `<div class="line">(Leerzeichen)</div>`;
+        }
+    }
+}
+</script>
+
+</body>
+</html>
